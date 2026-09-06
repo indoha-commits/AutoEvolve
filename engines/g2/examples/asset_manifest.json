@@ -1,0 +1,7 @@
+[
+  {"slide_number": 1, "local_path": "campaign/slide_01.jpg", "source_url": "https://www.pexels.com/photo/example", "provider": "pexels", "license": "Pexels license", "approved": true, "source_type": "stock"},
+  {"slide_number": 2, "local_path": "campaign/slide_02.jpg", "source_url": "https://www.pexels.com/photo/example", "provider": "pexels", "license": "Pexels license", "approved": true, "source_type": "stock"},
+  {"slide_number": 3, "local_path": "campaign/slide_03.jpg", "source_url": "https://www.pexels.com/photo/example", "provider": "pexels", "license": "Pexels license", "approved": true, "source_type": "stock"},
+  {"slide_number": 4, "local_path": "campaign/slide_04.jpg", "source_url": "https://www.pexels.com/photo/example", "provider": "pexels", "license": "Pexels license", "approved": true, "source_type": "stock"},
+  {"slide_number": 5, "local_path": "owned/product_ui.png", "source_url": null, "provider": "owned", "license": "Example Company owned", "approved": true, "source_type": "owned"}
+]

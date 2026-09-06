@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "company-core-g2"
+version = "0.8.1"
+description = "Policy-controlled Example Company media production runtime"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.8,<3", "Pillow>=10,<13"]
+
+[project.optional-dependencies]
+network-voice = ["edge-tts>=7.2"]
+voice = ["kokoro>=0.9.4", "soundfile>=0.12", "numpy>=1.26"]
+subtitles = ["faster-whisper>=1.1"]
+
+[project.scripts]
+company-core-g2 = "g2_runtime.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["g2_runtime*"]

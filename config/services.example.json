@@ -1,0 +1,24 @@
+{
+  "example-api": {
+    "health_url": "http://127.0.0.1:8000/health",
+    "expected_status": 200,
+    "health_timeout": 8,
+    "severity": "high",
+    "workspace": "example-project",
+    "recovery_command": "",
+    "post_recovery_wait": 3,
+    "diagnostic_commands": [
+      "curl -fsS http://127.0.0.1:8000/health"
+    ],
+    "code_error_patterns": [
+      "traceback",
+      "typeerror",
+      "500 internal server error"
+    ],
+    "canary_commands": [
+      "curl -fsS http://127.0.0.1:8000/health"
+    ],
+    "allow_auto_promote": false,
+    "ai_repair_on_unknown": false
+  }
+}

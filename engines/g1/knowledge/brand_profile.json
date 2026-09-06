@@ -1,0 +1,17 @@
+{
+  "brand": "Example Company",
+  "positioning": "The operational control layer for port-to-warehouse logistics, connecting cargo, documents, milestones, internal teams and client visibility.",
+  "voice": ["professional", "operator-respectful", "Rwanda-grounded", "concise", "specific"],
+  "language": "English",
+  "primary_region": ["Rwanda", "East Africa", "EAC corridors"],
+  "avoid_voice": ["revolutionary", "game-changing", "10x", "seamless", "effortless", "AI-powered magic"],
+  "writing_rules": {
+    "one_buyer_per_campaign": true,
+    "one_operational_problem_per_campaign": true,
+    "headline_style": "short condensed uppercase statement",
+    "product_arrives_after_problem": true,
+    "prefer_operational_language": true
+  },
+  "public_customer_names_allowed": false
+}
+

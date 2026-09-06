@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "company-core-g1"
+version = "0.1.6.1"
+description = "Policy-controlled Example Company Growth content runtime"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.8,<3", "pypdf>=5,<7"]
+
+[project.optional-dependencies]
+crawl = ["crawl4ai>=0.9,<1"]
+
+[project.scripts]
+company-core-g1 = "g1_runtime.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["g1_runtime*"]

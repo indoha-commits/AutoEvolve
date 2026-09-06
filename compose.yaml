@@ -1,0 +1,11 @@
+services:
+  company-core:
+    build: .
+    env_file: .env
+    ports:
+      - "8787:8787"
+    volumes:
+      - ./data:/app/data
+      - ./projects:/app/projects
+      - ./config:/app/config
+    restart: unless-stopped

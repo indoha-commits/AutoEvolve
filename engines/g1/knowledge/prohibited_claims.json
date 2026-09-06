@@ -1,0 +1,28 @@
+{
+  "case_insensitive_terms": [
+    "galaxy logistics",
+    "galaxy clearing",
+    "rra approved",
+    "ai replaces customs",
+    "14-day trial",
+    "14 day trial",
+    "30-day pilot",
+    "30 day pilot",
+    "revolutionary",
+    "10x",
+    "real-time visibility",
+    "realtime visibility"
+  ],
+  "patterns": [
+    "guarantee(?:d|s)?[^.!?]{0,60}clearance",
+    "guarantee(?:d|s)?[^.!?]{0,60}cost reduction",
+    "eliminate(?:s|d)? all delays"
+  ],
+  "internal_topics": [
+    "service role key",
+    "database project identifier",
+    "internal IP address",
+    "security vulnerability",
+    "private customer identity"
+  ]
+}

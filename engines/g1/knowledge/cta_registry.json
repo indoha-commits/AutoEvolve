@@ -1,0 +1,9 @@
+{
+  "awareness": {"label": "Book a walkthrough", "copy": "See how Example Company fits your operation. Book a walkthrough."},
+  "education": {"label": "Book a walkthrough", "copy": "See how Example Company fits your operation. Book a walkthrough."},
+  "walkthrough": {"label": "Book a walkthrough", "copy": "Book a walkthrough."},
+  "trial": {"label": "Start your 7-day trial", "copy": "Ready to use it with real cargo? Start your 7-day trial."},
+  "forbidden_offers": ["14-day trial", "30-day pilot"],
+  "unconfirmed_trial_claims": ["full access", "no credit card required"]
+}
+

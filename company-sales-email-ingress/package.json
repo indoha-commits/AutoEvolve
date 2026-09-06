@@ -1,0 +1,12 @@
+{
+  "name": "company-sales-email-ingress",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "postal-mime": "^2.7.6"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

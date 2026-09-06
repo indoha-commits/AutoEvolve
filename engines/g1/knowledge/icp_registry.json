@@ -1,0 +1,15 @@
+{
+  "primary": [
+    {"id": "freight_md", "title": "Managing Director", "company": "Rwanda freight forwarder or customs broker", "pains": ["operational visibility", "client disputes", "accountability", "scaling without more coordination overhead"]},
+    {"id": "ops_manager", "title": "Operations Manager", "company": "Rwanda freight forwarder or customs broker", "pains": ["status chasing", "missing documents", "handoff failures", "unclear milestones"]},
+    {"id": "clearing_agent", "title": "Clearing Agent", "company": "EAC clearing and forwarding operation", "pains": ["outdated PDFs", "document requirements", "duplicate entry", "approval delays"]},
+    {"id": "documentation_officer", "title": "Documentation Officer", "company": "Document-heavy logistics operation", "pains": ["B/L invoice and packing-list fragmentation", "version control", "verification workload"]}
+  ],
+  "secondary": [
+    {"id": "procurement_logistics", "title": "Procurement Logistics", "company": "Energy or infrastructure importer"},
+    {"id": "digital_transformation", "title": "Digital Transformation Lead", "company": "Logistics or trade organization"}
+  ],
+  "influence_only": ["government", "sector association", "development institution"],
+  "disqualify": ["generic SaaS buyer", "solo driver", "government as sole H1 paying customer"]
+}
+

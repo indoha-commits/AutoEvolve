@@ -1,0 +1,14 @@
+{
+  "campaign_id": "camp_7680a7086c1f",
+  "platform": "youtube",
+  "purpose": "Explain why document state becomes an operational control problem across freight handoffs.",
+  "hook": "A shipment and its records do not always move through the same operational channel.",
+  "scene_narration": {
+    "cover": "A shipment and its records do not always move through the same operational channel. The cargo may continue through the corridor while its documents move between email, messaging, shared folders, and different teams.",
+    "evidence": "That creates separate copies of the same operational record. One team may open an email attachment while another works from a file saved earlier in the operations folder.",
+    "operational_complexity": "Operations, documentation, clearing teams, and clients depend on the cargo record for different decisions. Each handoff needs the current documents and the current validation state.",
+    "failure_point": "When those states are separated, the next operator must first determine which copy is current before continuing the work. The issue is not simply document storage. It is operational continuity.",
+    "control_system": "Example Company provides one operational control layer for cargo, documents, milestones, and client visibility. The cargo record becomes the shared point around which those operational states reconnect.",
+    "outcome_cta": "See how this control layer fits your freight operation. Book a walkthrough at example.com."
+  }
+}

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Company Core</title>
+  <link rel="stylesheet" href="/static/cockpit.css">
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="core-mark" aria-hidden="true"></div>
+      <div>
+        <div class="brand">COMPANY CORE</div>
+        <div class="brand-sub">Founder control environment</div>
+      </div>
+    </div>
+
+    <div class="sysline">
+      <span class="dot online"></span>
+      <span>RESEARCH ONLINE</span>
+      <span class="hide-mobile">·</span>
+      <span class="hide-mobile" data-clock></span>
+    </div>
+  </header>
+
+  <nav class="mode-nav">
+    <a class="mode-link active" href="/">Research</a>
+    <a class="mode-link" href="/operations">Operations</a>
+  </nav>
+
+  <section class="layout" id="home">
+    <article class="panel operation">
+      <div class="panel-inner">
+        <div class="kicker">Research cockpit</div>
+
+        {% if active_project %}
+          <h1>{{ active_project.name }}</h1>
+          <div class="muted">
+            Key insights, project memory, and decision framing stay here. Direct sales and marketing actions now live in Operations.
+          </div>
+
+          <div class="op-meta">
+            <span class="chip">
+              <span class="dot online"></span>
+              {{ active_project.status|upper }}
+            </span>
+            <span class="chip">PROJECT {{ active_project.id }}</span>
+            <span class="chip">{{ active_project.slug }}</span>
+          </div>
+
+          <div class="row-actions">
+            <form method="post">
+              <input type="hidden" name="message" value="Give me the current state of the active project, including completed work, findings, risks, unresolved questions, and the recommended next step.">
+              <button class="mini-action" type="submit">PROJECT BRIEF</button>
+            </form>
+            <form method="post">
+              <input type="hidden" name="message" value="I want to start a new research track for the current project. Ask clarifying questions only if needed and keep the work focused on evidence, risks, and decisions.">
+              <button class="mini-action secondary" type="submit">NEW RESEARCH</button>
+            </form>
+            <a class="mini-action secondary mode-jump" href="/operations">OPEN OPERATIONS</a>
+          </div>
+        {% else %}
+          <h1>No active operation</h1>
+          <div class="muted">Issue a research command to create or select a project.</div>
+        {% endif %}
+      </div>
+    </article>
+
+    <aside class="panel">
+      <div class="panel-inner">
+        <div class="kicker">System matrix</div>
+        <div class="matrix">
+          <div class="matrix-row">
+            <div class="matrix-left"><span class="dot online"></span><span>Founder</span></div>
+            <div class="matrix-state">ONLINE</div>
+          </div>
+          <div class="matrix-row">
+            <div class="matrix-left"><span class="dot online"></span><span>Research</span></div>
+            <div class="matrix-state">PRIMARY</div>
+          </div>
+          <div class="matrix-row">
+            <div class="matrix-left"><span class="dot online"></span><span>Operations Cockpit</span></div>
+            <div class="matrix-state">SEPARATE</div>
+          </div>
+          <div class="matrix-row">
+            <div class="matrix-left"><span class="dot online"></span><span>Cloud Router</span></div>
+            <div class="matrix-state">ACTIVE</div>
+          </div>
+          <div class="matrix-row">
+            <div class="matrix-left"><span class="dot standby"></span><span>Local Intelligence</span></div>
+            <div class="matrix-state">STANDBY</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="composer" id="command">
+    <form method="post" class="composer-shell">
+      <div class="kicker">Research command interface</div>
+      <textarea name="message" placeholder="What should we research, verify, or challenge?" required></textarea>
+      <div class="composer-footer">
+        <div class="command-hint">FOUNDER / PROJECT MEMORY / RESEARCH ROUTING</div>
+        <button type="submit">EXECUTE COMMAND →</button>
+      </div>
+      <div class="quick-actions">
+        <button type="button" class="quick-command" data-command="Summarize the current project, its latest findings, risks, unresolved questions, and recommend the next action.">PROJECT BRIEF</button>
+        <button type="button" class="quick-command" data-command="Review the current project and identify the three most important things we should investigate next.">NEXT RESEARCH</button>
+        <button type="button" class="quick-command" data-command="Challenge the assumptions behind the current project. Find the strongest reasons this idea may fail.">RED TEAM</button>
+        <button type="button" class="quick-command" data-command="Map the most decision-relevant unknowns for the current project, rank them by impact, and propose the fastest way to validate each one.">UNKNOWNS MAP</button>
+      </div>
+    </form>
+  </section>
+
+  {% if error %}
+    <div class="error">
+      <strong>AGENT CONNECTION DEGRADED</strong><br>
+      {{ error }}
+    </div>
+  {% endif %}
+
+  {% if result and result.type == "research" %}
+  <section class="panel" id="intelligence">
+    <div class="report-hero">
+      <div class="kicker">Latest intelligence</div>
+      <h2>{{ result.research.title }}</h2>
+      <p>{{ result.research.executive_summary }}</p>
+      <div class="decision">
+        <span class="badge">DECISION</span>
+        <span class="decision-main">{{ result.research.decision }}</span>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><strong>{{ result.research.verified_findings|length }}</strong><span>Verified</span></div>
+        <div class="metric"><strong>{{ result.research.inferences|length }}</strong><span>Inferences</span></div>
+        <div class="metric"><strong>{{ result.research.risks|length }}</strong><span>Risks</span></div>
+        <div class="metric"><strong>{{ result.research.sources|length }}</strong><span>Sources</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="layout" style="margin-top:16px;">
+    <article class="panel">
+      <div class="panel-inner">
+        <div class="section-title"><h2>Verified findings</h2><span class="badge">EVIDENCE</span></div>
+        <ul class="list">
+          {% for item in result.research.verified_findings %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+    </article>
+    <article class="panel">
+      <div class="panel-inner">
+        <div class="section-title"><h2>Inference</h2><span class="badge">INTERPRETATION</span></div>
+        <ul class="list">
+          {% for item in result.research.inferences %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="layout" style="margin-top:16px;">
+    <article class="panel">
+      <div class="panel-inner">
+        <div class="section-title"><h2>Recommended MVP</h2><span class="badge">PRODUCT</span></div>
+        <ul class="list">
+          {% for item in result.research.recommended_mvp %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+    </article>
+    <article class="panel">
+      <div class="panel-inner">
+        <div class="section-title"><h2>Risks & unknowns</h2><span class="badge">WATCH</span></div>
+        <ul class="list">
+          {% for item in result.research.risks %}<li>{{ item }}</li>{% endfor %}
+          {% for item in result.research.unknowns %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  {% if result.research.sources %}
+  <section class="panel" style="margin-top:16px;">
+    <div class="panel-inner">
+      <div class="section-title"><h2>Evidence matrix</h2><span class="badge">{{ result.research.sources|length }} SOURCES</span></div>
+      {% for source in result.research.sources %}
+        <div class="source">
+          <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer">{{ source.title }}</a>
+          <div class="source-support">{{ source.supports }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <details class="details">
+    <summary>RAW AGENT OUTPUT</summary>
+    <pre>{{ result | tojson(indent=2) }}</pre>
+  </details>
+  {% elif result %}
+  <section class="panel campaign-notice">
+    <div class="panel-inner">
+      <div class="kicker">Agent result</div>
+      <h2>{{ result.type|replace('_', ' ')|upper }}</h2>
+      <p>{{ result.message if result.message else 'This action completed outside the research lane. Review the raw output below or continue in Operations.' }}</p>
+      <div class="row-actions">
+        <a class="mini-action" href="/operations">OPEN OPERATIONS</a>
+      </div>
+    </div>
+  </section>
+  <details class="details">
+    <summary>RAW AGENT OUTPUT</summary>
+    <pre>{{ result | tojson(indent=2) }}</pre>
+  </details>
+  {% endif %}
+
+  <section class="layout" style="margin-top:16px;" id="activity">
+    <article class="panel">
+      <div class="panel-inner">
+        <div class="section-title"><h2>Execution queue</h2><span class="badge">RECENT</span></div>
+        <div class="log">
+          {% if tasks %}
+            {% for task in tasks[:8] %}
+              <div class="log-row actionable-row">
+                <div class="log-id">{{ "%02d"|format(task.id) }}</div>
+                <div class="log-main">
+                  <strong>{{ task.agent|upper }}</strong>
+                  <div class="task-copy">{{ task.input }}</div>
+                  <div class="row-actions">
+                    <form method="post">
+                      <input type="hidden" name="message" value="Continue task {{ task.id }} in the current project. Previous task: {{ task.input }}">
+                      <button class="mini-action" type="submit">CONTINUE</button>
+                    </form>
+                    <form method="post">
+                      <input type="hidden" name="message" value="Review task {{ task.id }} and tell me the result, what it established, what remains unresolved, and what I should do next. Previous task: {{ task.input }}">
+                      <button class="mini-action secondary" type="submit">REVIEW</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="log-state">{{ task.status }}</div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="muted">No execution records yet.</div>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+
+    <article class="panel" id="archive">
+      <div class="panel-inner">
+        <div class="section-title"><h2>Intelligence archive</h2><span class="badge">PROJECT</span></div>
+        {% if research_history %}
+          {% for item in research_history %}
+            <div class="archive-item">
+              <div class="archive-title">{{ item.title }}</div>
+              <div class="archive-meta">{{ item.summary[:180] }}{% if item.summary|length > 180 %}...{% endif %}</div>
+              <div class="archive-meta" style="color:var(--success);">{{ item.decision }}</div>
+              <div class="row-actions">
+                <form method="post">
+                  <input type="hidden" name="message" value="Continue the research titled '{{ item.title }}'. Review what we already established, focus on unresolved unknowns and weak evidence, and advance the current project.">
+                  <button class="mini-action" type="submit">CONTINUE</button>
+                </form>
+                <form method="post">
+                  <input type="hidden" name="message" value="Review the previous research titled '{{ item.title }}'. Summarize what matters, challenge its conclusions, identify weak evidence, and tell me what decision we should make next.">
+                  <button class="mini-action secondary" type="submit">REVIEW</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="muted">No intelligence records yet.</div>
+        {% endif %}
+      </div>
+    </article>
+  </section>
+</div>
+
+<nav class="bottom-nav">
+  <a class="nav-item active" href="#home" data-scroll="home">CORE</a>
+  <a class="nav-item" href="#command" data-scroll="command">COMMAND</a>
+  <a class="nav-item" href="#intelligence" data-scroll="intelligence">INSIGHTS</a>
+  <a class="nav-item" href="#activity" data-scroll="activity">ACTIVITY</a>
+  <a class="nav-item" href="/operations">OPERATIONS</a>
+</nav>
+
+<script src="/static/cockpit.js"></script>
+</body>
+</html>

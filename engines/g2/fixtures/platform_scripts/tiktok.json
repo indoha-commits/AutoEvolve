@@ -1,0 +1,14 @@
+{
+  "campaign_id": "camp_7680a7086c1f",
+  "platform": "tiktok",
+  "purpose": "Reveal the problem in a conversational, native-feeling observation.",
+  "hook": "Here is the strange part about freight documents: the truck can be ahead of the record.",
+  "scene_narration": {
+    "cover": "Here is the strange part about freight documents: the truck can be ahead of the record.",
+    "evidence": "One copy is in email. Another is in a message. Someone else saved a third copy in the operations folder.",
+    "operational_complexity": "Now the next team has a simple question that is surprisingly hard to answer: which one is current?",
+    "failure_point": "Until they know, the handoff is carrying uncertainty instead of one shared record.",
+    "control_system": "Example Company brings the cargo, documents, milestones, and client visibility back around one operational record.",
+    "outcome_cta": "Follow the cargo trail, or book a walkthrough at example.com."
+  }
+}

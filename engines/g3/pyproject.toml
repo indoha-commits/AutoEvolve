@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "company-core-g3"
+version = "2.1.0"
+description = "Draft-only G2 to Buffer handoff with Cloudflare R2 media hosting"
+requires-python = ">=3.10"
+dependencies = ["boto3>=1.34,<2"]
+
+[project.scripts]
+company-core-g3 = "g3_runtime.cli:main"
+
+[tool.setuptools]
+packages = ["g3_runtime"]

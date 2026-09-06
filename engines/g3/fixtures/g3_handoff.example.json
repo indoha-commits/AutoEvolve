@@ -1,0 +1,25 @@
+{
+  "schema": "company-core.g3-handoff.v1",
+  "campaign_id": "camp_example",
+  "source_package_sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "publish_allowed": false,
+  "drafts": [
+    {
+      "platform": "instagram",
+      "channel_id": "optional-buffer-instagram-channel-id",
+      "content": "Approved Instagram caption from G2.",
+      "media": [
+        {"path": "media/slide_01.png", "sha256": "replace-with-file-sha256"},
+        {"path": "media/slide_02.png", "sha256": "replace-with-file-sha256"}
+      ]
+    },
+    {
+      "platform": "x",
+      "channel_id": "optional-buffer-x-channel-id",
+      "thread": [
+        {"content": "First approved X post.", "media": []},
+        {"content": "Second approved X post.", "media": []}
+      ]
+    }
+  ]
+}

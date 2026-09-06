@@ -1,0 +1,13 @@
+{
+  "example-project": {
+    "name": "Example Project",
+    "path": "/absolute/path/to/your/project",
+    "github_connection": "",
+    "supabase_connection": "",
+    "cloudflare_connection": "",
+    "validation": [
+      "npm run typecheck",
+      "npm run build"
+    ]
+  }
+}

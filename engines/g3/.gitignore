@@ -1,0 +1,5 @@
+.venv/
+config/g3.env
+state/*.sqlite3
+backups/*
+!backups/.gitkeep

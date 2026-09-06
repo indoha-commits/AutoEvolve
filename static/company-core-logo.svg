@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 40" role="img" aria-labelledby="title">
+  <title id="title">Company Core</title>
+  <rect width="40" height="40" rx="11" fill="#5e6ad2"/>
+  <path d="M12 12h16v5H17v11h11v-5h-6v-5h11v15H12z" fill="#fff"/>
+  <text x="52" y="26" fill="#f5f7ff" font-family="ui-sans-serif, sans-serif" font-size="18" font-weight="700">Company Core</text>
+</svg>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Company Sales</title>
+  <link rel="stylesheet" href="/static/cockpit.css">
+</head>
+<body data-page="{{ page_mode or 'sales' }}" data-sales-view="{{ sales_view or 'discovery' }}">
+<div class="shell">
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="core-mark" aria-hidden="true"></div>
+      <div>
+        <div class="brand">COMPANY CORE</div>
+        <div class="brand-sub">Sales action deck</div>
+      </div>
+    </div>
+
+    <div class="sysline">
+      <span class="dot online"></span>
+      <span>SALES LIVE</span>
+      <span class="hide-mobile">·</span>
+      <span class="hide-mobile" data-clock></span>
+    </div>
+  </header>
+
+  <nav class="mode-nav">
+    <a class="mode-link" href="/">Research</a>
+    <a class="mode-link {% if active_nav == 'operations' %}active{% endif %}" href="/operations">Operations</a>
+    <a class="mode-link {% if active_nav == 'sales' %}active{% endif %}" href="/operations/sales">Sales</a>
+    <a class="mode-link {% if active_nav == 'marketing' %}active{% endif %}" href="/operations/marketing">Marketing</a>
+    <a class="mode-link {% if active_nav == 'history' %}active{% endif %}" href="/operations/history">History</a>
+  </nav>
+
+  <nav class="sales-workspace-nav" aria-label="Sales workspace">
+    <a class="sales-workspace-link {% if sales_view != 'email' %}active{% endif %}" href="/operations/sales/discovery">
+      <span class="kicker">01 · FIND</span>
+      <strong>Lead discovery</strong>
+      <small>Intake, research and contact resolution</small>
+    </a>
+    <a class="sales-workspace-link {% if sales_view == 'email' %}active{% endif %}" href="/operations/sales/email">
+      <span class="kicker">02 · CONTACT</span>
+      <strong>Email outreach</strong>
+      <small>Drafts, approvals, delivery and replies</small>
+    </a>
+  </nav>
+
+  <section class="panel operations-hero" id="operations-home">
+    <div class="panel-inner">
+      <div class="section-title">
+        <div>
+          <div class="kicker">{% if sales_view == 'email' %}Outreach desk{% else %}Discovery ocean{% endif %}</div>
+          <h1>{% if sales_view == 'email' %}Email agent control{% else %}Lead discovery control{% endif %}</h1>
+        </div>
+        <span class="badge" id="operations-project-chip">{{ active_project.slug if active_project else 'NO PROJECT' }}</span>
+      </div>
+      <p class="muted operations-copy">
+        {% if sales_view == 'email' %}
+        Work only on contacts ready for outreach. Generate and edit emails, approve delivery, monitor replies, and align scheduled meetings without research controls competing for attention.
+        {% else %}
+        Build the lead pool from website signups, popup funnels, direct research, and domain imports. Resolve company and contact data here before moving into email outreach.
+        {% endif %}
+      </p>
+
+      <div class="operations-bar">
+        <div class="operations-health" id="operations-health">
+          <div class="muted">Loading sales readiness…</div>
+        </div>
+        <label class="token-field hero-token" for="sales-action-token">
+          <span class="token-label">Founder sales action token</span>
+          <input id="sales-action-token" type="password" placeholder="Paste SALES_ACTION_TOKEN for direct sales actions">
+        </label>
+        <div class="row-actions sales-toolbar-actions">
+          <button class="mini-action" type="button" id="sales-save-token">SAVE TOKEN</button>
+          <button class="mini-action secondary" type="button" id="global-refresh">REFRESH</button>
+          <a class="mini-action secondary mode-jump" href="/operations">OPEN OPERATIONS</a>
+        </div>
+      </div>
+
+      <div class="operations-flash muted" id="operations-flash">Sales actions are ready.</div>
+    </div>
+  </section>
+
+  <section class="operations-grid sales-workspace-grid sales-{{ sales_view or 'discovery' }}-grid" id="workspace">
+    {% if sales_view != 'email' %}
+    <aside class="panel launcher-panel">
+      <div class="panel-inner">
+        <div class="section-title">
+          <div>
+            <div class="kicker">Sales launchers</div>
+            <h2>Start sales work</h2>
+          </div>
+          <span class="badge">DIRECT</span>
+        </div>
+
+        <div class="launcher-group">
+          <div class="launcher-title">Lead intake</div>
+          <button class="launcher-button" type="button" id="launcher-sync-sales">Sync Website Forms</button>
+          <button class="launcher-button subtle" type="button" data-sales-source-filter="website" data-focus="sales-queue">Website signups</button>
+          <button class="launcher-button subtle" type="button" data-sales-source-filter="popup" data-focus="sales-queue">Popup and quiz leads</button>
+          <button class="launcher-button subtle" type="button" data-sales-filter="new" data-focus="sales-queue">New inbound leads</button>
+          <button class="launcher-button subtle" type="button" data-sales-filter="contacted" data-focus="sales-queue">Sent outreach</button>
+          <button class="launcher-button subtle" type="button" data-sales-filter="scheduled" data-focus="sales-queue">Meetings scheduled</button>
+          <button class="launcher-button subtle" type="button" data-sales-filter="replied" data-focus="sales-queue">Replies inbox</button>
+        </div>
+
+        <div class="launcher-group">
+          <div class="launcher-title">Direct actions</div>
+          <button class="launcher-button" type="button" data-drawer="lead-launcher">New Sales Lead</button>
+          <button class="launcher-button" type="button" data-drawer="prospect-launcher">Prospect Domain</button>
+          <button class="launcher-button" type="button" data-drawer="research-launcher">Research Leads</button>
+          <button class="launcher-button subtle" type="button" data-sales-filter="qualified" data-focus="sales-queue">Qualified leads</button>
+          <button class="launcher-button subtle" type="button" data-sales-filter="draft_ready" data-focus="sales-queue">Draft outreach</button>
+          <button class="launcher-button subtle" type="button" data-sales-filter="approved" data-focus="sales-queue">Approve and send</button>
+        </div>
+
+        <div class="drawer-stack">
+          <section class="drawer-card hidden" id="lead-launcher">
+            <div class="drawer-head">
+              <strong>New sales lead</strong>
+              <button class="drawer-close" type="button" data-close-drawer="lead-launcher">×</button>
+            </div>
+            <form id="lead-launch-form" class="drawer-form">
+              <label><span>Full name</span><input name="full_name" type="text"></label>
+              <label><span>Email</span><input name="email" type="email"></label>
+              <label><span>Company</span><input name="company" type="text"></label>
+              <label><span>Job title</span><input name="job_title" type="text"></label>
+              <label><span>Country</span><input name="country" type="text"></label>
+              <label><span>Message</span><textarea name="message"></textarea></label>
+              <label class="inline-check"><input name="consent" type="checkbox" checked> Consent confirmed</label>
+              <div class="row-actions">
+                <button class="mini-action" type="submit">CREATE LEAD</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="drawer-card hidden" id="prospect-launcher">
+            <div class="drawer-head">
+              <strong>Prospect company domain</strong>
+              <button class="drawer-close" type="button" data-close-drawer="prospect-launcher">×</button>
+            </div>
+            <form id="prospect-launch-form" class="drawer-form">
+              <p class="muted">Find one contact for one company. This lookup only runs after you choose a domain.</p>
+              <label><span>Provider</span>
+                <select name="provider">
+                  <option value="hunter">Hunter</option>
+                  <option value="apollo">Apollo</option>
+                </select>
+              </label>
+              <label><span>Domain</span><input name="domain" type="text" placeholder="example.com" required></label>
+              <input name="limit" type="hidden" value="1">
+              <div class="row-actions">
+                <button class="mini-action" type="submit">FIND ONE CONTACT</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="drawer-card hidden" id="research-launcher">
+            <div class="drawer-head">
+              <strong>Research leads</strong>
+              <button class="drawer-close" type="button" data-close-drawer="research-launcher">×</button>
+            </div>
+            <form id="research-launch-form" class="drawer-form">
+              <p class="muted">Finds distinct companies across Prospeo, Apollo, and Lusha. Contact credits are only used later, one selected domain at a time.</p>
+              <label><span>Industry</span><input name="industry" type="text" placeholder="Logistics and Supply Chain" autocomplete="off" required></label>
+              <label><span>Location</span><input name="location" type="text" placeholder="United States" autocomplete="off"></label>
+              <input name="limit_per_provider" type="hidden" value="5">
+              <div class="row-actions">
+                <button class="mini-action" type="submit">RESEARCH 3 SOURCES</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </aside>
+    {% endif %}
+
+    <section class="operations-center">
+      <section class="panel queue-panel" id="sales-queue">
+        <div class="panel-inner">
+          <div class="section-title">
+            <div>
+              <div class="kicker">{% if sales_view == 'email' %}Email queue{% else %}Discovery queue{% endif %}</div>
+              <h2>{% if sales_view == 'email' %}Outreach control{% else %}Lead intelligence{% endif %}</h2>
+            </div>
+            <span class="badge" id="sales-count">SYNCING</span>
+          </div>
+          {% if sales_view != 'email' %}
+          <div class="filter-row" id="sales-source-filters">
+            <button class="filter-chip active" type="button" data-sales-source-filter="all">All sources</button>
+            <button class="filter-chip" type="button" data-sales-source-filter="website">Website</button>
+            <button class="filter-chip" type="button" data-sales-source-filter="popup">Popup</button>
+            <button class="filter-chip" type="button" data-sales-source-filter="research">Research</button>
+            <button class="filter-chip" type="button" data-sales-source-filter="manual">Manual</button>
+          </div>
+          {% endif %}
+          <div class="filter-row" id="sales-filters">
+            <button class="filter-chip active" type="button" data-sales-filter="all">All</button>
+            {% if sales_view == 'email' %}
+            <button class="filter-chip" type="button" data-sales-filter="draft_ready">Draft ready</button>
+            <button class="filter-chip" type="button" data-sales-filter="approved">Approved</button>
+            <button class="filter-chip" type="button" data-sales-filter="contacted">Sent</button>
+            <button class="filter-chip" type="button" data-sales-filter="replied">Replied</button>
+            <button class="filter-chip" type="button" data-sales-filter="scheduled">Scheduled</button>
+            <button class="filter-chip" type="button" data-sales-filter="failed">Failed</button>
+            {% else %}
+            <button class="filter-chip" type="button" data-sales-filter="new">New</button>
+            <button class="filter-chip" type="button" data-sales-filter="enriched">Enriched</button>
+            <button class="filter-chip" type="button" data-sales-filter="qualified">Qualified</button>
+            <button class="filter-chip" type="button" data-sales-filter="suppressed">Suppressed</button>
+            {% endif %}
+          </div>
+          <div id="sales-list" class="sales-list" aria-live="polite">
+            <div class="muted">Loading lead state…</div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    {% if sales_view == 'email' %}
+    <aside class="panel history-panel" id="history">
+      <div class="panel-inner">
+        <div class="section-title">
+          <div>
+            <div class="kicker">Sales history</div>
+            <h2>Replies and delivery timeline</h2>
+          </div>
+          <span class="badge" id="history-count">SYNCING</span>
+        </div>
+        <div class="filter-row" id="history-filters">
+          <button class="filter-chip active" type="button" data-history-filter="all">All</button>
+          <button class="filter-chip" type="button" data-history-filter="sales">Sales</button>
+        </div>
+        <label class="history-search">
+          <span>Search lead</span>
+          <input id="history-search" type="search" placeholder="lead, company, event">
+        </label>
+        <div id="history-list" class="history-list" aria-live="polite">
+          <div class="muted">Loading sales history…</div>
+        </div>
+      </div>
+    </aside>
+    {% endif %}
+  </section>
+</div>
+
+<script src="/static/operations.js?v=20260905-2"></script>
+</body>
+</html>

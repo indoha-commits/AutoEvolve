@@ -1,0 +1,67 @@
+{
+  "usage": "Positive style context only. Never copy reserved headlines verbatim.",
+  "style_principles": [
+    "Open with a concrete operational contrast, not a generic SaaS benefit.",
+    "Move from physical cargo or document handoff to the record mismatch.",
+    "Introduce Example Company only after the operational problem is visible.",
+    "Use short uppercase headlines and specific operator language.",
+    "Separate stock photography, document composites, diagrams, product UI and end cards."
+  ],
+  "reserved_headlines": [
+    "ONE SHIPMENT. MANY BORDERS. ONE RECORD.",
+    "GEOGRAPHY ADDS COST AND TIME.",
+    "THE TRUCK IS NOT THE ONLY THING MOVING.",
+    "ONE OLD PDF CAN STOP THE NEXT TEAM.",
+    "MAKE THE CORRIDOR VISIBLE.",
+    "THE TRUCK MOVED. THE RECORD DID NOT.",
+    "ONE SHIPMENT. THREE VERSIONS.",
+    "EVERY HANDOFF NEEDS THE SAME RECORD.",
+    "AN OLD PDF BECOMES A NEW DELAY.",
+    "CONTROL THE DOCUMENT TRAIL.",
+    "PUT EVERY TEAM ON THE CURRENT RECORD."
+  ],
+  "campaigns": [
+    {
+      "id": "golden_outdated_document_versions",
+      "narrative": "outdated_document_versions",
+      "buyer": "ops_manager",
+      "objective": "awareness",
+      "story_anatomy": [
+        "physical shipment and record move at different speeds",
+        "the same shipment appears as different files across channels",
+        "multiple roles depend on one current record",
+        "the wrong version reaches a downstream handoff",
+        "documents and validation states reconnect around the cargo record",
+        "walkthrough CTA"
+      ],
+      "visual_strategy": [
+        "stock_photo",
+        "document_composite",
+        "route_diagram",
+        "document_composite",
+        "product_ui",
+        "branded_end_card"
+      ]
+    },
+    {
+      "id": "golden_cross_border_handoffs",
+      "narrative": "cross_border_handoffs",
+      "buyer": "clearing_agent",
+      "objective": "awareness",
+      "story_anatomy": [
+        "one shipment crosses several operational boundaries",
+        "each handoff adds another record dependency",
+        "a mismatch becomes visible at the next checkpoint",
+        "one cargo trail connects documents events approvals and updates",
+        "walkthrough CTA"
+      ],
+      "visual_strategy": [
+        "stock_photo",
+        "route_diagram",
+        "document_composite",
+        "product_ui",
+        "branded_end_card"
+      ]
+    }
+  ]
+}

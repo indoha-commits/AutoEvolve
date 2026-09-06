@@ -1,0 +1,22 @@
+{
+  "campaign_id": "camp_7680a7086c1f",
+  "objective": "awareness",
+  "buyer": "ops_manager",
+  "narrative": "outdated_document_versions",
+  "format": "carousel",
+  "platforms": ["instagram", "x"],
+  "claim_ids": ["product.control_layer"],
+  "slides": [
+    {"number": 1, "purpose": "cover", "headline": "CARGO AND RECORDS MOVE SEPARATELY", "body": "Cargo and its records can move through separate operational channels.", "visual_concept": "Freight operator beside cargo documents and a truck.", "asset_strategy": "stock_photo", "image_queries": ["East Africa freight operator cargo documents"], "claim_ids": []},
+    {"number": 2, "purpose": "evidence", "headline": "SEPARATE CHANNELS HOLD SEPARATE COPIES", "body": "Email, messaging and operations folders may contain separate document copies.", "visual_concept": "Three dated shipping document copies arranged on a desk.", "asset_strategy": "document_composite", "image_queries": ["dated shipping document copies office desk"], "claim_ids": []},
+    {"number": 3, "purpose": "operational_complexity", "headline": "SEVERAL TEAMS USE THE CARGO RECORD", "body": "Operations, documentation and clearing teams each work around the cargo record.", "visual_concept": "Three freight roles connected around one cargo record.", "asset_strategy": "route_diagram", "image_queries": ["East Africa freight operations team office"], "claim_ids": []},
+    {"number": 4, "purpose": "failure_point", "headline": "INCONSISTENT DOCUMENT STATES", "body": "Documents and validation states must reconnect around the cargo record to ensure accuracy.", "visual_concept": "A cargo record with documents and validation states being updated in sync.", "asset_strategy": "document_composite", "image_queries": ["cargo record with documents and validation states", "documents and validation states being updated in sync"], "claim_ids": []},
+    {"number": 5, "purpose": "control_system", "headline": "EXAMPLE COMPANY CONNECTS THE CARGO RECORD", "body": "Example Company provides one operational control layer for cargo, documents, milestones and client visibility.", "visual_concept": "Approved Example Company product interface showing the cargo record and its operational details.", "asset_strategy": "product_ui", "image_queries": [], "claim_ids": ["product.control_layer"]},
+    {"number": 6, "purpose": "outcome_cta", "headline": "BOOK A WALKTHROUGH", "body": "See how Example Company fits your operation. Book a walkthrough.", "visual_concept": "Official Example Company branded end card with the approved call to action.", "asset_strategy": "branded_end_card", "image_queries": [], "claim_ids": ["offer.walkthrough"]}
+  ],
+  "platform_copy": {"instagram_caption": "Freight teams work with document copies across several operational handoffs. Example Company provides one operational control layer for cargo, documents, milestones and client visibility. See how Example Company fits your operation. Book a walkthrough.", "x_post": "Freight teams work with document copies across several operational handoffs. Example Company provides one operational control layer for cargo, documents, milestones and client visibility. See how Example Company fits your operation. Book a walkthrough."},
+  "brand": {"canvas": "1080x1350", "logo_asset": "company_core_logo", "logo_variant": "white", "logo_position": "top_left"},
+  "generation": {"research": "fail_soft", "concepts": "model", "writer": "model", "deterministic_actions": ["safe_copy:cover", "safe_copy:evidence", "safe_copy:operational_complexity", "grounded_control_system", "approved_end_card", "grounded_platform_copy", "pruned_unused_claim_ids"]},
+  "quality": {"schema_valid": true, "all_claims_grounded": true, "forbidden_terms": [], "unsupported_claims": [], "duplicate_score": 0.2222, "brand_score": 1.0, "buyer_score": 0.9, "editorial_score": 1.0, "rewrite_count": 0, "warnings": []},
+  "status": "ready_for_media"
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schedule a Meeting</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: #d9e1ec;
+      --accent: #5E6AD2;
+      --accent-dark: #4957c6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #ffffff 0%, var(--bg) 55%, #edf2fa 100%);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(17, 24, 39, 0.08);
+    }
+    .brand {
+      width: 168px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1 { margin: 0 0 14px; font-size: 34px; line-height: 1.15; }
+    p { margin: 0 0 14px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0 8px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 13px 18px; border-radius: 12px; background: var(--accent);
+      color: #fff; text-decoration: none; font-weight: 700;
+    }
+    .btn:hover { background: var(--accent-dark); }
+    .ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .note { margin-top: 18px; font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <img class="brand" src="{{ company_logo_url }}" alt="{{ company_name }}">
+      <div class="eyebrow">Sales Meeting</div>
+      <h1>Schedule a meeting with {{ company_name }}</h1>
+      <p>Review cargo workflow friction, document control gaps, milestone visibility, and client retention opportunities with a live operator-focused walkthrough.</p>
+      <p>This stable CTA can be used across outbound email, social campaigns, and forms. The booking experience continues on your configured calendar page.</p>
+      <div class="cta-row">
+        <a class="btn" href="{{ calendar_page_url }}">Open Booking Calendar</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

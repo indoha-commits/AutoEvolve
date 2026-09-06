@@ -1,0 +1,20 @@
+{
+  "purpose": "Style and composition references only. These files are never used as production slide photography.",
+  "reuse_as_output": false,
+  "rules": [
+    "deep navy editorial base",
+    "white logo with protected space",
+    "large condensed uppercase headlines",
+    "realistic freight photography without neon treatment",
+    "indigo route lines with restrained magenta nodes",
+    "torn-paper or framed documentary composites",
+    "AI generation creates background plates only: no text, logos, dashboards, labels, or watermarks"
+  ],
+  "references": [
+    {"path": "reference_01_corridor_collage.jpg", "sha256": "b0b1e4090e9c2237ad5425a1d997ab1a170f325ab76eb12d1b6cd8059e5a9a59", "role": "corridor map and freight collage"},
+    {"path": "reference_02_route_comparison.jpg", "sha256": "e3cd8d03c693436b849a4558c8555d011d9817e3fbc03a1174fe4c0da556507a", "role": "split route comparison"},
+    {"path": "reference_03_document_flow.jpg", "sha256": "0d95adfcf16fc1e8061b0d74837c0276b70af9d8a633fe41102e75e375d0b10d", "role": "document flow and route overlay"},
+    {"path": "reference_04_outdated_pdf.jpg", "sha256": "d6c522e8a98172c277f21af949a13ad10bebd7c58c97d5f45fa3fee9cb4ec465", "role": "operational handoff composite"},
+    {"path": "reference_05_cargo_trail.jpg", "sha256": "d252d1faa6aae507b990278e4e6c606c2180b9c719de68826b3683f1d9b5c94c", "role": "cargo trail and end-state system"}
+  ]
+}

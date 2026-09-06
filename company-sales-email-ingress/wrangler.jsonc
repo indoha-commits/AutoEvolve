@@ -1,0 +1,8 @@
+{
+  "name": "company-sales-email-ingress",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-28",
+  "observability": {
+    "enabled": true
+  }
+}

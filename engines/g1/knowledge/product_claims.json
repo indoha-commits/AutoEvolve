@@ -1,0 +1,23 @@
+{
+  "approved": [
+    {"id": "product.control_layer", "text": "Example Company provides one operational control layer for cargo, documents, milestones and client visibility.", "source": "https://example.com/"},
+    {"id": "product.internal_dashboard", "text": "Example Company includes an internal operations dashboard.", "source": "https://example.com/"},
+    {"id": "product.client_dashboard", "text": "Example Company includes a client dashboard for shipment visibility.", "source": "https://example.com/"},
+    {"id": "product.document_upload", "text": "Documents can be uploaded and linked to cargo records.", "source": "https://example.com/product"},
+    {"id": "product.document_validation", "text": "The workflow supports document validation and verification states.", "source": "https://example.com/product"},
+    {"id": "product.milestones", "text": "Cargo milestones can be tracked with timestamps.", "source": "https://example.com/"},
+    {"id": "product.audit_trail", "text": "Example Company maintains cargo activity and audit history.", "source": "https://example.com/"},
+    {"id": "product.digital_archive", "text": "Plans include a digital document archive.", "source": "https://example.com/pricing"},
+    {"id": "product.web_based", "text": "Example Company is web-based.", "source": "https://example.com/how-it-works"},
+    {"id": "offer.walkthrough", "text": "Prospects can book a walkthrough.", "source": "founder-confirmed"},
+    {"id": "offer.trial_7_day", "text": "Qualified high-intent prospects can start a 7-day trial.", "source": "founder-confirmed"}
+  ],
+  "restricted": [
+    {"id": "restricted.realtime", "text": "Real-time claims require technical confirmation for the specific feature."},
+    {"id": "restricted.ai", "text": "AI-assisted workflow claims must describe the actual function and cannot imply customs replacement."},
+    {"id": "restricted.go_live_week", "text": "Going live within a week requires operational evidence."},
+    {"id": "restricted.paying_clients", "text": "Paying-client and live-usage claims require current Founder approval."},
+    {"id": "restricted.outcomes", "text": "Percentage reductions and measurable savings require source evidence and Founder approval."}
+  ]
+}
+

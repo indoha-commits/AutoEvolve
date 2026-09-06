@@ -1,0 +1,62 @@
+[
+  {
+    "slide_number": 1,
+    "local_path": "slide_01_pexels.jpg",
+    "source_url": "https://www.pexels.com/photo/view-from-below-container-loading-crane-overhead-28438329/",
+    "provider": "pexels",
+    "license": "Pexels license",
+    "approved": false,
+    "candidate_id": "pexels:28438329",
+    "source_type": "stock",
+    "sha256": "09126759a3fb27e72cd40cae5b85074ac519fdcb738a8f8038942fb47c07904d",
+    "perceptual_hash": "85c4c2a690ddccea",
+    "prompt_sha256": null,
+    "width": 2000,
+    "height": 3008
+  },
+  {
+    "slide_number": 2,
+    "local_path": "slide_02_pexels.jpg",
+    "source_url": "https://www.pexels.com/photo/eyeglasses-on-office-desk-8970659/",
+    "provider": "pexels",
+    "license": "Pexels license",
+    "approved": false,
+    "candidate_id": "pexels:8970659",
+    "source_type": "stock",
+    "sha256": "8e7fca83661c518ad8633e70fe64438af2f945f8db57b775ec2aa50107307e1e",
+    "perceptual_hash": "fb07a4f3739e9b9f",
+    "prompt_sha256": null,
+    "width": 4016,
+    "height": 6016
+  },
+  {
+    "slide_number": 3,
+    "local_path": "slide_03_pexels.jpg",
+    "source_url": "https://www.pexels.com/photo/busy-container-port-with-cranes-in-the-philippines-38428623/",
+    "provider": "pexels",
+    "license": "Pexels license",
+    "approved": false,
+    "candidate_id": "pexels:38428623",
+    "source_type": "stock",
+    "sha256": "2ac7ca52fac37bf1e08bea8cca43817d1e9fef02ef5db593e615ba6dea751614",
+    "perceptual_hash": "f8fcfca7ce7647c3",
+    "prompt_sha256": null,
+    "width": 3060,
+    "height": 4080
+  },
+  {
+    "slide_number": 4,
+    "local_path": "slide_04_pexels.jpg",
+    "source_url": "https://www.pexels.com/photo/person-holding-white-papers-7018654/",
+    "provider": "pexels",
+    "license": "Pexels license",
+    "approved": false,
+    "candidate_id": "pexels:7018654",
+    "source_type": "stock",
+    "sha256": "27b52f6b016f660d8f73ccc7019661693ec6c62c711db3aa8d25259d1f7a717d",
+    "perceptual_hash": "9df8ccb8f0f79e11",
+    "prompt_sha256": null,
+    "width": 4000,
+    "height": 6000
+  }
+]

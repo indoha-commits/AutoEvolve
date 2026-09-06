@@ -1,0 +1,8 @@
+{
+  "instagram": {"primary": true, "carousel_canvas": [1080, 1350], "aspect_ratio": "4:5", "slide_min": 5, "slide_max": 6, "caption_max_chars": 2200},
+  "x": {"primary": false, "adapt_from_master": true, "media_max": 4, "use_thread_if_needed": true},
+  "instagram_story": {"canvas": [1080, 1920], "enabled_later": true},
+  "social_end_card": {"canvas": [1080, 1080], "standalone_or_final_frame": true},
+  "linkedin": {"enabled_later": true}
+}
+

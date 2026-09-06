@@ -1,0 +1,14 @@
+{
+  "campaign_id": "camp_7680a7086c1f",
+  "platform": "shorts",
+  "purpose": "Deliver one complete operational insight quickly.",
+  "hook": "The cargo moved, but its record did not.",
+  "scene_narration": {
+    "cover": "The cargo moved, but its record did not.",
+    "evidence": "Email, messaging, and operations folders can each hold a different document copy.",
+    "operational_complexity": "Then operations, documentation, and clearing teams have to decide which one is current.",
+    "failure_point": "That uncertainty follows the shipment into the next handoff.",
+    "control_system": "Example Company reconnects cargo, documents, milestones, and client visibility around one operational record.",
+    "outcome_cta": "See how it fits your operation. Book a walkthrough at example.com."
+  }
+}
