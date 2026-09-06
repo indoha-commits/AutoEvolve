@@ -262,7 +262,10 @@ class OperationsUiTests(unittest.TestCase):
                 auth=self.auth,
             )
         fake_output = {"ok": True, "provider": "buffer", "results": [{"platform": "instagram", "status": "draft_confirmed", "post_id": "buf_123"}]}
-        with patch.dict(os.environ, {"DASHBOARD_PASSWORD": "dashboard-secret"}, clear=False):
+        with patch.dict(os.environ, {
+            "DASHBOARD_PASSWORD": "dashboard-secret",
+            "MARKETING_G3_BIN": str(Path(__file__)),
+        }, clear=False):
             with patch("app.marketing_api._run", return_value='prefix {"ok": true} suffix'), patch("app.marketing_api._last_json", return_value=fake_output):
                 response = self.client.post(
                     f"/company/marketing/manual-posts/{created['id']}/buffer-draft",
@@ -277,7 +280,10 @@ class OperationsUiTests(unittest.TestCase):
 
     def test_manual_video_uses_controlled_link_and_creates_buffer_handoff(self):
         project_root = Path(self.temporary.name) / "projects"
-        with patch.dict(os.environ, {"DASHBOARD_PASSWORD": "dashboard-secret"}, clear=False), \
+        with patch.dict(os.environ, {
+            "DASHBOARD_PASSWORD": "dashboard-secret",
+            "MARKETING_G3_BIN": str(Path(__file__)),
+        }, clear=False), \
              patch("app.marketing_api.PROJECTS_ROOT", project_root):
             session = self.client.post(
                 "/company/marketing/manual-posts/session",

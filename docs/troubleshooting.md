@@ -26,6 +26,7 @@ curl http://localhost:8787/company/marketing/doctor -u "$DASHBOARD_USER:$DASHBOA
 | FFmpeg error | FFmpeg is absent or source media is invalid | Run `ffmpeg -version` and validate the input file |
 | Buffer draft failure | Missing channel ID or media URL is not public | Run the G3 doctor and open the R2 media URL without authentication |
 | Resend domain error | Sender domain is not verified | Verify the domain and make `SALES_FROM_EMAIL` use that domain |
+| `No matching distribution` for OpenHands | Setup is running on Python 3.11 or older | Install Python 3.12 and run `make setup PYTHON=python3.12` |
 
 ## Logs and retries
 

@@ -1,14 +1,17 @@
+PYTHON ?= python3
+
 .PHONY: setup setup-core setup-engines init doctor dev test lint check email-worker-install
 
 setup: setup-core setup-engines init doctor
 
 setup-core:
-	python3 -m venv .venv
+	@$(PYTHON) -c 'import sys; assert sys.version_info >= (3, 12), "Company Core requires Python 3.12+; run make setup PYTHON=python3.12"'
+	$(PYTHON) -m venv .venv
 	.venv/bin/python -m pip install --upgrade pip
 	.venv/bin/python -m pip install -e ".[dev]"
 
 setup-engines:
-	./scripts/install_engines.sh
+	PYTHON=$(PYTHON) ./scripts/install_engines.sh
 
 init:
 	./scripts/init_env.sh

@@ -9,20 +9,21 @@ providers are optional: configure only the integrations you intend to use.
 
 ## Quick start
 
-Requirements: Python 3.11+, GNU Make, OpenSSL, and FFmpeg. Node.js is only needed for the optional
+Requirements: Python 3.12+, GNU Make, OpenSSL, and FFmpeg. Python 3.12 is required by the bundled
+OpenHands coding SDK. Node.js is only needed for the optional
 Cloudflare email Worker.
 
 On Debian or Ubuntu:
 
 ```bash
 sudo apt-get update
-sudo apt-get install python3 python3-venv python3-pip make openssl ffmpeg
+sudo apt-get install python3.12 python3.12-venv python3-pip make openssl ffmpeg
 ```
 
 On macOS with Homebrew:
 
 ```bash
-brew install python@3.11 make openssl ffmpeg
+brew install python@3.12 make openssl ffmpeg
 ```
 
 ```bash
@@ -30,6 +31,9 @@ git clone https://github.com/your-org/company-core.git
 cd company-core
 make setup
 ```
+
+If `python3` is older than 3.12 but `python3.12` is installed, run
+`make setup PYTHON=python3.12`.
 
 `make setup` creates isolated virtual environments, installs the application and media engines,
 copies safe configuration templates, and generates local authentication secrets. It never

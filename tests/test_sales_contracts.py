@@ -239,7 +239,8 @@ class SalesContractsTest(unittest.TestCase):
 
         lead, _ = upsert_lead({"company": "Example Logistics", "company_domain": "https://example.com", "source": "prospeo"})
 
-        with patch("services.sales_service.CompanyEnrichClient") as CompanyEnrichClientMock:
+        with patch.dict(os.environ, {"CE_API_KEY": "test-company-enrich-key"}, clear=False), \
+             patch("services.sales_service.CompanyEnrichClient") as CompanyEnrichClientMock:
             client = CompanyEnrichClientMock.return_value
             client.enrich_company.return_value = {
                 "name": "Example Logistics",
