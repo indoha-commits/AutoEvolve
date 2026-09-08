@@ -9,8 +9,9 @@ campaign and the platform-specific storyboard.
 1. Founder-approved local catalog.
 2. Pexels video and image search.
 3. Pixabay video and image search.
-4. Wikimedia Commons video and image search with file-level license metadata.
-5. Lordicon free vector search for the control-system scene only when an API
+4. Coverr video search, with its quota-bearing signed URL resolved only after selection.
+5. Wikimedia Commons video and image search with file-level license metadata.
+6. Lordicon free vector search for the control-system scene only when an API
    token is configured.
 
 All calls execute concurrently under one global deadline. A failed or slow
@@ -42,6 +43,7 @@ multiple scenes.
 ## Security and approval
 
 - Download URLs must remain HTTPS and inside provider-specific host allowlists.
+- Coverr search results retain a provider API URL; the short-lived storage URL is requested only for the selected asset.
 - Downloads have media-specific byte limits.
 - Images are decoded, videos are inspected with FFprobe, JSON is parsed and SVG
   signatures are checked.

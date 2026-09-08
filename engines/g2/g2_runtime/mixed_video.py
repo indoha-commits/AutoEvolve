@@ -42,6 +42,50 @@ def _run(command: list[str]) -> None:
     subprocess.run(command, check=True)
 
 
+def _edit_decision(scene: MixedScene, layers: dict) -> dict[str, str]:
+    if scene.purpose == "outcome_cta":
+        motion = "locked_off"
+    elif layers.get("background_kind") == "video":
+        motion = "source_motion"
+    else:
+        motion = ("slow_push_in", "slow_pan_right", "slow_pan_left")[(scene.number - 1) % 3]
+    if scene.number == 1:
+        cut = "clean_open"
+    elif scene.number % 2 == 0 or scene.purpose == "outcome_cta":
+        cut = "short_fade"
+    else:
+        cut = "hard_cut"
+    return {"motion": motion, "cut": cut}
+
+
+def _background_filter(
+    scene: MixedScene,
+    layers: dict,
+    width: int,
+    height: int,
+    fps: int,
+) -> tuple[str, dict[str, str]]:
+    decision = _edit_decision(scene, layers)
+    if decision["motion"] in {"source_motion", "locked_off"}:
+        value = (
+            f"scale={width}:{height}:force_original_aspect_ratio=increase:flags=lanczos,"
+            f"crop={width}:{height},setsar=1,fps={fps}"
+        )
+    elif decision["motion"] == "slow_push_in":
+        value = (
+            f"zoompan=z='min(zoom+0.00035,1.06)':"
+            f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={width}x{height}:fps={fps}"
+        )
+    else:
+        travel = f"max(1,on)/({max(scene.duration_seconds, 0.65):.3f}*{fps})"
+        x = f"'(iw-iw/zoom)*{travel}'" if decision["motion"] == "slow_pan_right" else f"'(iw-iw/zoom)*(1-{travel})'"
+        value = (
+            f"zoompan=z='1.045':x={x}:y='ih/2-(ih/zoom/2)':"
+            f"d=1:s={width}x{height}:fps={fps}"
+        )
+    return value, decision
+
+
 def _render_scene(
     scene: MixedScene,
     layers: dict,
@@ -52,13 +96,14 @@ def _render_scene(
     fps: int,
 ) -> None:
     duration = scene.duration_seconds
-    # Static full-frame holds are intentional. They eliminate fractional crop
-    # jitter, synthetic camera movement and H.264 motion artifacts.
+    # Motion is deterministic and deliberately shallow so stills gain energy
+    # without looking like artificial handheld footage.
+    background_filter, decision = _background_filter(scene, layers, width, height, fps)
+    transition = ",fade=t=in:st=0:d=0.14" if decision["cut"] == "short_fade" else ""
     filter_complex = (
-        f"[0:v]scale={width}:{height}:force_original_aspect_ratio=increase:flags=lanczos,"
-        f"crop={width}:{height},setsar=1,fps={fps}[bg];"
+        f"[0:v]{background_filter}[bg];"
         "[1:v]format=rgba[ov];"
-        "[bg][ov]overlay=0:0:format=auto[v]"
+        f"[bg][ov]overlay=0:0:format=auto{transition}[v]"
     )
     if layers.get("background_kind") == "video":
         background_input = [
@@ -158,6 +203,7 @@ def render_video(
     voice_provenance = []
     scene_timings = []
     scene_files = []
+    edit_decisions = []
     for original in plan.scenes:
         scene = original.model_copy(deep=True)
         asset = None
@@ -245,6 +291,7 @@ def render_video(
         if record and record.media_type == "video":
             layers["clip_start_seconds"] = record.clip_start_seconds
         scene_path = scenes_root / f"scene_{scene.number:02d}.mp4"
+        edit_decisions.append({"scene": scene.number, **_edit_decision(scene, layers)})
         _render_scene(scene, layers, audio_path, scene_path, width, height, plan.fps)
         scene_files.append(scene_path)
         actual_scenes.append(scene)
@@ -287,7 +334,7 @@ def render_video(
         "publish_allowed": False,
         "visual_language": {
             "imagery": "full_frame_context",
-            "motion": "source_video_or_stable_static_hold",
+            "motion": "source_video_or_restrained_push_pan",
             "missing_media": "hard_fail_except_configured_showcase",
             "control_system_priority": "authoritative_configured_showcase",
             "editorial_cards": False,
@@ -296,11 +343,12 @@ def render_video(
             "branding": "configured_showcase_and_premade_outro",
         },
         "scenes": [scene.model_dump(mode="json") for scene in actual_scenes],
+        "edit_decisions": edit_decisions,
         "asset_provenance": provenance,
         "synchronization": {
             "scene_boundaries": "generated_audio_duration",
             "subtitle_timing": "provider_boundaries_or_audio_duration",
-            "concat": "lossless_scene_stream_copy",
+            "concat": "lossless_scene_stream_copy_with_baked_visual_cuts",
             "delivery_encode": "single_h264_crf16_after_subtitles",
         },
         "status": "review_rendered" if review else "ready_for_founder_review",

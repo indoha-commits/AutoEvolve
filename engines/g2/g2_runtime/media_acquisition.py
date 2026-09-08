@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import urllib.request
@@ -17,6 +18,7 @@ from .models import AssetCandidate, AssetRecord
 DOWNLOAD_HOSTS = {
     "pexels": {"pexels.com", "videos.pexels.com", "images.pexels.com"},
     "pixabay": {"pixabay.com", "cdn.pixabay.com", "player.vimeo.com"},
+    "coverr": {"api.coverr.co", "coverr.co", "storage.googleapis.com"},
     "wikimedia": {"wikimedia.org", "upload.wikimedia.org"},
     "lordicon": {"lordicon.com", "cdn.lordicon.com", "media.lordicon.com"},
 }
@@ -34,7 +36,25 @@ def _download(candidate: AssetCandidate, destination: Path, timeout: int = 45) -
     parsed = urlparse(candidate.download_url)
     if parsed.scheme != "https" or not _allowed((parsed.hostname or "").lower(), DOWNLOAD_HOSTS[candidate.provider]):
         raise ValueError("download URL is outside the provider allowlist")
-    request = urllib.request.Request(candidate.download_url, headers={"User-Agent": "Example Company-G2/0.8.1"})
+    download_url = candidate.download_url
+    if candidate.provider == "coverr":
+        api_key = os.getenv("COVERR_API_KEY", "").strip()
+        if not api_key:
+            raise RuntimeError("COVERR_API_KEY is not configured")
+        signed_request = urllib.request.Request(download_url, headers={
+            "API_KEY": api_key,
+            "Accept": "application/json",
+            "User-Agent": "company-core-g2/0.8.2",
+        })
+        with urllib.request.urlopen(signed_request, timeout=timeout) as response:
+            signed_payload = json.loads(response.read(100_000))
+        download_url = signed_payload if isinstance(signed_payload, str) else signed_payload.get("url")
+        if not download_url:
+            raise ValueError("Coverr returned no signed download URL")
+        signed = urlparse(download_url)
+        if signed.scheme != "https" or not _allowed((signed.hostname or "").lower(), DOWNLOAD_HOSTS["coverr"]):
+            raise ValueError("Coverr signed URL is outside the provider allowlist")
+    request = urllib.request.Request(download_url, headers={"User-Agent": "company-core-g2/0.8.2"})
     limit = MAX_BYTES[candidate.media_type]
     temporary = destination.with_suffix(destination.suffix + ".part")
     with urllib.request.urlopen(request, timeout=timeout) as response, temporary.open("wb") as output:

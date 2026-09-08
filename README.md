@@ -5,6 +5,10 @@
 <h1 align="center">Company Core</h1>
 
 <p align="center">
+  <img src="docs/assets/banner.jpg" width="100%" alt="Company Core sales and marketing operations workspace">
+</p>
+
+<p align="center">
   Self-hosted sales and marketing operations, from first signal to approved outreach.
 </p>
 

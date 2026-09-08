@@ -25,7 +25,7 @@ OpenAI-compatible APIs can be used. See [model routing](model-routing.md) for co
 | Company enrichment | `PDL_API_KEY`, `CE_API_KEY` |
 | Outbound email | `SALES_RESEND_API_KEY`, `SALES_RESEND_DOMAIN`, `SALES_FROM_EMAIL` |
 | Reply webhooks | `SALES_RESEND_WEBHOOK_SECRET` |
-| Stock media | `PEXELS_API_KEY`, `PIXABAY_API_KEY` in the G2 environment |
+| Stock media | `PEXELS_API_KEY`, `PIXABAY_API_KEY`, `COVERR_API_KEY` in the G2 environment |
 | Social publishing | Buffer and R2 values in `engines/g3/config/g3.env` |
 | Calendar | `SALES_CALENDAR_BASE_URL`, `SALES_CALENDAR_EVENT_PATH` |
 

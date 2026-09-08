@@ -75,12 +75,6 @@ def render_layers(
 
     layer = Image.new("RGBA", size, (0, 0, 0, 0))
 
-    if review:
-        draw = ImageDraw.Draw(layer)
-        width, _ = size
-        draw.rounded_rectangle((width - 274, 55, width - 56, 105), 14, fill=(2, 7, 17, 160))
-        draw.text((width - 238, 69), "REVIEW CUT", fill=(255, 255, 255, 210))
-
     overlay_path = root / f"scene_{scene.number:02d}_overlay.png"
     layer.save(overlay_path, "PNG", optimize=True)
     preview_path = None

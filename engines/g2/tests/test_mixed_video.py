@@ -55,7 +55,7 @@ class MixedVideoTests(unittest.TestCase):
             self.assertEqual(text.count("Dialogue:"), sum((len(scene.narration.split()) + 4) // 5 for scene in plan.scenes))
             self.assertIn("Cargo and its records", text)
 
-    def test_scene_layers_are_vertical_and_review_marked(self):
+    def test_scene_layers_are_vertical_and_review_has_no_frame_badge(self):
         plan = compile_storyboard(load_campaign(CAMPAIGN), 45)
         record = load_asset_records(MANIFEST)[0]
         with tempfile.TemporaryDirectory() as temp:
@@ -63,6 +63,8 @@ class MixedVideoTests(unittest.TestCase):
             for key in ("background", "overlay", "preview"):
                 with Image.open(value[key]) as image:
                     self.assertEqual(image.size, (1080, 1920))
+            with Image.open(value["overlay"]).convert("RGBA") as overlay:
+                self.assertFalse(any(pixel[3] for pixel in overlay.getdata()))
 
     def test_control_scene_uses_configured_showcase_and_end_scene_uses_outro(self):
         plan = compile_storyboard(load_campaign(CAMPAIGN), 45)
@@ -222,7 +224,7 @@ class MixedVideoTests(unittest.TestCase):
             self.assertIn("00:00:00,200 --> 00:00:01,100", text)
             self.assertIn("00:00:02,000", text)
 
-    def test_scene_render_uses_stable_static_framing(self):
+    def test_scene_render_uses_restrained_motion_and_dynamic_cuts(self):
         plan = compile_storyboard(load_campaign(CAMPAIGN), 45)
         with patch("g2_runtime.mixed_video._run") as run:
             _render_scene(
@@ -237,9 +239,23 @@ class MixedVideoTests(unittest.TestCase):
         command = " ".join(run.call_args.args[0])
         self.assertNotIn("sin(", command)
         self.assertNotIn("cos(", command)
+        self.assertIn("zoompan", command)
+        self.assertIn("1.06", command)
         self.assertIn("fps_mode cfr", command)
         self.assertIn("-crf 0", command)
         self.assertIn("-tune stillimage", command)
+
+        with patch("g2_runtime.mixed_video._run") as run:
+            _render_scene(
+                plan.scenes[1],
+                {"background": "background.jpg", "overlay": "overlay.png"},
+                Path("audio.wav"),
+                Path("scene.mp4"),
+                1080,
+                1920,
+                30,
+            )
+        self.assertIn("fade=t=in:st=0:d=0.14", " ".join(run.call_args.args[0]))
 
     def test_scene_background_is_lossless_png(self):
         plan = compile_storyboard(load_campaign(CAMPAIGN), 45)

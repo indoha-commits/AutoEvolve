@@ -10,14 +10,22 @@
 - Measured audio duration owns scene boundaries.
 - Faster-Whisper is reserved for uploaded speech with unknown timing.
 - The premade outro asset owns all visible branding; editorial scenes have no logo overlay.
-- FFmpeg owns composition and encoding only.
+- FFmpeg owns deterministic push/pan movement, scene cuts, composition and encoding.
 - G2 cannot publish.
 
 ## Review and production modes
 
-Review mode may use unapproved, checksum-valid stock assets. Every scene receives a
-visible review mark. Production mode denies any unapproved or modified stock asset.
-Both modes remain non-publishing outputs.
+Review mode may use unapproved, checksum-valid stock assets, but it does not alter the
+visible frame with a badge or logo. The output filename and manifest identify review
+renders. Production mode denies any unapproved or modified stock asset. Both modes
+remain non-publishing outputs.
+
+## Edit grammar
+
+- Source videos retain their native movement after deterministic crop and scaling.
+- Still images receive a shallow push or horizontal pan capped near 6% zoom.
+- Scene changes alternate clean hard cuts and 140 ms visual fades.
+- The configured CTA/outro remains locked off so its designed branding is not distorted.
 
 ## Extension contract
 

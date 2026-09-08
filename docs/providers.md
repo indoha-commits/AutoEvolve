@@ -14,6 +14,7 @@ Core, and inspect `/company/sales/doctor` or `/company/marketing/doctor`.
 | Resend | Approved outbound email and event tracking | `SALES_RESEND_*` | Sending email |
 | Pexels | Stock image/video search | `PEXELS_API_KEY` | Provider request |
 | Pixabay | Stock media fallback | `PIXABAY_API_KEY` | Provider request |
+| Coverr | Additional stock-video search | `COVERR_API_KEY` | Provider request; selected download only |
 | Buffer | Social draft creation | `BUFFER_API_KEY` and channel IDs | Draft creation |
 | Cloudflare R2 | Public media hosting for Buffer | `R2_*` | Upload/storage |
 
@@ -47,8 +48,9 @@ automatic contact disabled until a controlled test email succeeds.
 
 ## Media providers
 
-Set `PEXELS_API_KEY` and/or `PIXABAY_API_KEY` in the root `.env`; G2 inherits the application
-environment. Stock results still require operator review for relevance and licensing. Lordicon is
+Set `PEXELS_API_KEY`, `PIXABAY_API_KEY`, and/or `COVERR_API_KEY` in the root `.env`; G2 inherits the
+application environment. Coverr is video-only and its short-lived download URL is requested only
+after a candidate wins selection. Stock results still require operator review for relevance and licensing. Lordicon is
 optional and uses `LORDICON_API_TOKEN`.
 
 ## Buffer and R2

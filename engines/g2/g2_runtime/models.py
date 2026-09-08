@@ -90,7 +90,7 @@ class AssetRecord(StrictModel):
 
 class AssetCandidate(StrictModel):
     candidate_id: str
-    provider: Literal["pexels", "pixabay", "wikimedia", "lordicon", "local", "omniroute", "owned"]
+    provider: Literal["pexels", "pixabay", "coverr", "wikimedia", "lordicon", "local", "omniroute", "owned"]
     source_type: Literal["stock", "generated", "owned", "vector"]
     media_type: Literal["image", "video", "lottie", "svg"] = "image"
     query: str

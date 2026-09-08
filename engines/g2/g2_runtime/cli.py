@@ -14,6 +14,7 @@ from .memory import AssetMemory
 from .omniroute_image import OmniRouteImageProvider
 from .pexels import PexelsProvider
 from .pixabay import PixabayProvider
+from .coverr import CoverrProvider
 from .renderer import render_carousel
 from .resolver import AssetResolver
 from .video import video_manifest
@@ -178,6 +179,7 @@ def main() -> int:
             "faster_whisper": {"configured": faster_whisper_available, "required_for": "uploaded or externally recorded speech only"},
             "pexels": {"configured": bool(os.getenv("PEXELS_API_KEY"))},
             "pixabay": {"configured": bool(os.getenv("PIXABAY_API_KEY"))},
+            "coverr": {"configured": bool(os.getenv("COVERR_API_KEY")), "required_for": "optional expanded stock-video discovery"},
             "wikimedia": {"configured": True, "required_for": "open-license image and video discovery"},
             "lordicon": {"configured": bool(os.getenv("LORDICON_API_TOKEN")), "required_for": "optional free vector animation discovery"},
             "media_intelligence": {"configured": True, "policy": "deadline-bound federated retrieval"},
@@ -284,6 +286,7 @@ def main() -> int:
                 LocalCatalogProvider(args.catalog),
                 PexelsProvider(timeout=max(2, min(int(args.deadline), 10))),
                 PixabayProvider(timeout=max(2, min(int(args.deadline), 10))),
+                CoverrProvider(timeout=max(2, min(int(args.deadline), 10))),
             ]
             if not getattr(args, "images_only", False):
                 providers.extend([

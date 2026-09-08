@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.8.2 - expanded video discovery and dynamic editing
+
+- Added deferred-download Coverr video discovery alongside Pexels and Pixabay.
+- Added restrained push and pan movement for still scenes while retaining source-video motion.
+- Added deterministic hard cuts and short visual fades between scene types.
+- Removed the persistent review badge from editorial video frames.
+
 ## v0.8.1 — relevance and voice comparison closure
 
 - Added required scene-specific visual anchors before technical ranking bonuses.
