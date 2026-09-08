@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="static/company-core-logo.svg" width="72" alt="Company Core logo">
-</p>
-
 <h1 align="center">Company Core</h1>
 
 <p align="center">
