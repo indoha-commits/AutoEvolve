@@ -1,4 +1,19 @@
-# Company Core
+<p align="center">
+  <img src="static/company-core-logo.svg" width="72" alt="Company Core logo">
+</p>
+
+<h1 align="center">Company Core</h1>
+
+<p align="center">
+  Self-hosted sales and marketing operations, from first signal to approved outreach.
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-67d9a7"></a>
+  <img alt="Python 3.12+" src="https://img.shields.io/badge/python-3.12%2B-4aa7ff">
+  <img alt="FastAPI" src="https://img.shields.io/badge/API-FastAPI-009688">
+  <img alt="Self-hosted" src="https://img.shields.io/badge/deployment-self--hosted-101e2a">
+</p>
 
 Company Core is a self-hosted sales and marketing operations workspace. It combines lead intake,
 prospect research, contact enrichment, email drafting and delivery, campaign production, media
@@ -6,6 +21,31 @@ assembly, publishing handoff, approval queues, and activity history in one FastA
 
 The repository includes the complete application and its G1/G2/G3 marketing engines. External
 providers are optional: configure only the integrations you intend to use.
+
+## Product at a glance
+
+Company Core gives operators a browser-based cockpit instead of scattering research, enrichment,
+drafts, approvals, and campaign state across unrelated tools.
+
+### Discover companies and resolve the right contact
+
+Search a market by industry and location, keep one candidate per company, and resolve contact data
+only when a company is worth pursuing. This keeps prospecting costs controlled while preserving the
+source and research context used for outreach.
+
+![Company Core lead discovery workspace](docs/assets/company-core-lead-discovery.png)
+
+### Turn company intelligence into an approved action
+
+Enriched company context, contact readiness, generated drafts, delivery events, and follow-up state
+remain attached to the lead. Sales and marketing actions stay reviewable before anything reaches an
+external provider.
+
+![Company Core company intelligence workspace](docs/assets/company-core-lead-intelligence.png)
+
+The same cockpit also handles marketing campaign direction, scripts, scene assets, carousel and
+video uploads, Buffer draft handoff, attribution, and operating history. See the
+[product tour](docs/product-tour.md) for the page-by-page workflow.
 
 ## Quick start
 
@@ -27,8 +67,8 @@ brew install python@3.12 make openssl ffmpeg
 ```
 
 ```bash
-git clone https://github.com/your-org/company-core.git
-cd company-core
+git clone https://github.com/indoha-commits/GrowthRail.git
+cd GrowthRail
 make setup
 ```
 
@@ -182,6 +222,7 @@ company-sales-email-ingress/    optional Cloudflare inbound-email Worker
 config/                         local service and workspace registry
 data/ + projects/               private runtime state, never committed
 docs/                           setup and integration guides
+docs/assets/                    GitHub product illustrations
 ```
 
 ## Development
